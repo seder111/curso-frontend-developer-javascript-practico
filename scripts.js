@@ -12,9 +12,14 @@ const shoppingCart = document.querySelector('.navbar-shopping-cart');
 //Mostramos o dejamos de mostrar el menu de usuario con una Arrow function.
 emailNavBar.addEventListener( 'click', () => {
     const isCartProductDetailOpen = !productDetail.classList.contains('inactive');
-
+    const isProductDetailOpen = !productDetailInfo.classList.contains('inactive');
+    
     if (isCartProductDetailOpen) {
         productDetail.classList.add('inactive');
+    }
+    
+    if ( isProductDetailOpen ) {
+        productDetailInfo.classList.add('inactive');
     }
 
     desktopMenu.classList.toggle('inactive')
@@ -30,11 +35,17 @@ burguerIcon.addEventListener('click', toggleMobileMenu);
 
 function toggleMobileMenu() {
     const isCartProductDetailOpen = !productDetail.classList.contains('inactive');
+    const isProductDetailOpen = !productDetailInfo.classList.contains('inactive');
 
+    
     if (isCartProductDetailOpen) {
         productDetail.classList.add('inactive');
     }
-
+    
+    if ( isProductDetailOpen ) {
+        productDetailInfo.classList.add('inactive');
+    }
+    
     mobileMenu.classList.toggle('inactive');
 }
 
@@ -44,6 +55,7 @@ shoppingCart.addEventListener('click', toggleCartProductDetail);
 function toggleCartProductDetail() {
     const isMobileMenuOpen = !mobileMenu.classList.contains('inactive');
     const isDesktopMenuOpen = !desktopMenu.classList.contains('inactive');
+    const isProductDetailOpen = !productDetailInfo.classList.contains('inactive');
 
     if (isMobileMenuOpen) {
         mobileMenu.classList.add('inactive');
@@ -52,6 +64,12 @@ function toggleCartProductDetail() {
     if(isDesktopMenuOpen) {
         desktopMenu.classList.add('inactive');
     }
+
+    if ( isProductDetailOpen ) {
+        productDetailInfo.classList.add('inactive');
+    }
+
+
 
     productDetail.classList.toggle('inactive');
 }
@@ -91,6 +109,37 @@ products.push({
     price: 1111020,
 });
 
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+products.push({
+    name: 'Perry Lana',
+    image: 'https://images.pexels.com/photos/13249098/pexels-photo-13249098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    price: 1111020,
+});
+
 //Ejemplo:
 /* <div class="product-card">
         <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
@@ -116,6 +165,10 @@ function renderProducts(products) {
     
         const productImg = document.createElement('img');
         productImg.setAttribute('src',product.image);
+        productImg.addEventListener('click', openProductDetailInfo);
+
+        const imgCloseProductDetail = document.querySelector('.product-detail-close');
+        imgCloseProductDetail.addEventListener('click', closeProductDetail);
     
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
@@ -146,3 +199,34 @@ function renderProducts(products) {
 }
 
 renderProducts(products);
+
+
+//Escuchamos evento click en todos los productos
+//Mostramos o no la información del producto
+
+const productCard = document.querySelectorAll('.product-card');
+const productDetailInfo = document.querySelector('.product-detail-info');
+
+function openProductDetailInfo() {
+    const isMobileMenuOpen = !mobileMenu.classList.contains('inactive');
+    const isShoppingCartOpen = !productDetail.classList.contains('inactive');
+    const isDesktopMenuOpen = !desktopMenu.classList.contains('inactive');
+
+    if ( isMobileMenuOpen ) {
+        mobileMenu.classList.add('inactive');
+    }
+
+    if ( isShoppingCartOpen ) {
+        productDetail.classList.add('inactive');
+    }
+
+    if ( isDesktopMenuOpen ) {
+        desktopMenu.classList.add('inactive');
+    }
+
+    productDetailInfo.classList.remove('inactive');
+}
+
+function closeProductDetail() {
+    productDetailInfo.classList.add('inactive');
+}
